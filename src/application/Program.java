@@ -29,9 +29,10 @@ public class Program {
 
 			System.out.print("Digite o id");
 			int ids = sc.nextInt();
-			Funcionarios fuId = list.stream().filter(x -> x.getId().equals(ids)).findFirst().orElse(null);
-			while (fuId.equals(ids)) {
-				System.out.println("Ja existe");
+//			Funcionarios fuId = list.stream().filter(x -> x.getId().equals(ids)).findFirst().orElse(null);
+			while (temId(list, ids)) {
+				System.out.println("Id ja existe");
+				ids = sc.nextInt();
 			}
 
 			System.out.print("Entre com o nome do departamento ");
@@ -52,6 +53,7 @@ public class Program {
 			double salario = sc.nextDouble();
 
 			fun = new Funcionarios(ids, nomes, idade, Level.valueOf(levels), salario, new Departamento(nomeDep));
+			list.add(fun);
 
 		}
 
@@ -89,4 +91,8 @@ public class Program {
 		sc.close();
 	}
 
+	public static boolean temId(List<Funcionarios> list, int id) {
+		Funcionarios funs = list.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+		return funs != null;
+	}
 }
